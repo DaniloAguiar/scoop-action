@@ -1,4 +1,4 @@
-name: 'Install Scoop'
+name: 'Scoop Action'
 description: 'Installs Scoop package manager on Windows.'
 
 inputs:

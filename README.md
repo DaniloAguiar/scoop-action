@@ -10,6 +10,6 @@ This GitHub Action installs the Scoop package manager on a Windows runner.
 ## Example usage
 
 ```yaml
-uses: DaniloAguiar/scoop@v1
+uses: DaniloAguiar/scoop-action@v1
 with:
   scoop_version: 'latest'

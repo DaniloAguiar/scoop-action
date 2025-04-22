@@ -1,0 +1,17 @@
+name: Install Scoop
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install_scoop:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Scoop
+        uses: DaniloAguiar/scoop-action@v1
