@@ -1,0 +1,12 @@
+name: 'Install Scoop'
+description: 'Installs Scoop package manager on Windows.'
+
+inputs:
+  scoop_version:
+    description: 'Version of Scoop to install'
+    required: false
+    default: 'latest'
+
+runs:
+  using: 'powershell'
+  main: 'install.ps1'
