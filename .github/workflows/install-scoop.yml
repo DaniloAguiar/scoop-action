@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Scoop
-        uses: DaniloAguiar/scoop-action@v1
+        uses: DaniloAguiar/scoop-action@main
