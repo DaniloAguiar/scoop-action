@@ -12,19 +12,20 @@ runs:
   steps:
     - name: Set execution policy to allow script running
       shell: pwsh
-      run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+      run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
     - name: Install Scoop
       shell: pwsh
       run: |
-        Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+        Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+        $env:PATH += ";$env:USERPROFILE\scoop\shims"
 
     - name: Add buckets
       shell: pwsh
       run: |
         $buckets = '${{ inputs.bucket_add }}'.Split(',')
-        foreach ($bucket in $buckets) {
-          scoop bucket add $bucket
+        foreach ($name in $buckets) {
+          scoop bucket add $name
         }
 
     - name: Verify Scoop installation
