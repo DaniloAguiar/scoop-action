@@ -12,4 +12,4 @@ This GitHub Action installs the Scoop package manager on a Windows runner.
 ```yaml
 uses: DaniloAguiar/scoop-action@v1
 with:
-  scoop_version: 'latest'
+  bucket_add: main,extras

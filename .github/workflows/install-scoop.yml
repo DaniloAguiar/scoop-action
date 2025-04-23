@@ -15,3 +15,5 @@ jobs:
 
       - name: Install Scoop
         uses: DaniloAguiar/scoop-action@main
+        with:
+          bucket_add: main,extras

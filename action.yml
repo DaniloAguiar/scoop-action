@@ -2,11 +2,27 @@ name: 'Scoop Action'
 description: 'Installs Scoop package manager on Windows.'
 
 inputs:
-  scoop_version:
-    description: 'Version of Scoop to install'
+  bucket_add:
+    description: 'Comma-separated list of additional buckets to add'
     required: false
-    default: 'latest'
+    default: 'main,extras'
 
 runs:
-  using: 'powershell'
-  main: 'install.ps1'
+  using: 'composite'
+  steps:
+    - name: Set execution policy to allow script running
+      run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+      
+    - name: Install Scoop
+      run: |
+        Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+      
+    - name: Add buckets
+      run: |
+        $buckets = '${{ inputs.bucket_add }}'.Split(',')
+        foreach ($bucket in $buckets) {
+          scoop bucket add $bucket
+        }
+
+    - name: Verify Scoop installation
+      run: scoop --version
