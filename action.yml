@@ -18,14 +18,14 @@ runs:
       shell: pwsh
       run: |
         Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-        $env:PATH += ";$env:USERPROFILE\scoop\shims"
+        [System.Environment]::SetEnvironmentVariable('PATH', "$env:USERPROFILE\scoop\shims;" + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)
 
     - name: Add buckets
       shell: pwsh
       run: |
         $buckets = '${{ inputs.bucket_add }}'.Split(',')
-        foreach ($name in $buckets) {
-          scoop bucket add $name
+        foreach ($bucket in $buckets) {
+          scoop bucket add $bucket
         }
 
     - name: Verify Scoop installation
