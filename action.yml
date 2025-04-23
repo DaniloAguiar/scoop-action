@@ -11,13 +11,16 @@ runs:
   using: 'composite'
   steps:
     - name: Set execution policy to allow script running
+      shell: pwsh
       run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-      
+
     - name: Install Scoop
+      shell: pwsh
       run: |
         Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-      
+
     - name: Add buckets
+      shell: pwsh
       run: |
         $buckets = '${{ inputs.bucket_add }}'.Split(',')
         foreach ($bucket in $buckets) {
@@ -25,4 +28,5 @@ runs:
         }
 
     - name: Verify Scoop installation
+      shell: pwsh
       run: scoop --version
