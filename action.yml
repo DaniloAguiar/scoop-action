@@ -18,8 +18,8 @@ runs:
       shell: pwsh
       run: |
         Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-        echo "SCOOP_PATH=$HOME/scoop/shims" >> $GITHUB_ENV
-        echo "PATH=$SCOOP_PATH:$PATH" >> $GITHUB_ENV
+        $env:PATH += ";$env:USERPROFILE\scoop\shims"
+        echo "PATH=$env:PATH" >> $env:GITHUB_ENV
 
     - name: Add buckets
       shell: pwsh
